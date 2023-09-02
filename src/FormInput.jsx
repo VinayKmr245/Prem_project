@@ -6,16 +6,20 @@ export default function FormInput(props){
     const {inputName}=props;
 
     const [name,setName]=useState('');
+    const [err,setErr]=useState(false)
     const formDataContext=useContext(FormDataContext);
 
     const handleBlur=(e)=>{
-        formDataContext[inputName]=e.target.value;
+        validate()
+        const {formData,setFormData}=formDataContext
+        setFormData({...formData,[inputName]:e.target.value})
     }
     const handleChange=(e)=>{
         setName(e.target.value)
     }
-    const validate=(e)=>{
-        return new RegExp("[^A-Za-z]").test(e.target.value)
+    const validate=()=>{
+        const res=!new RegExp("[^A-Za-z]").test(name);
+        setErr(!res)
     }
     return(
         <div className="p-2">
@@ -26,7 +30,7 @@ export default function FormInput(props){
             name={inputName}
             placeholder={inputName}
             value={name}
-            error={name.length!=0 && validate}
+            error={err}
             onChange={handleChange}
             onBlur={handleBlur}
             />

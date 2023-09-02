@@ -15,7 +15,7 @@ export function FormDataProvider(props){
         "Property Type":""
     })
     return(
-        <FormDataContext.Provider value={formData ,setFormData}>
+        <FormDataContext.Provider value={{formData ,setFormData}}>
             {props.children}
         </FormDataContext.Provider>
     )

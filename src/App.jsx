@@ -4,15 +4,29 @@ import FormNumberInput  from "./FormNumberInput"
 import { LOCATIONS,PROPERTY_TYPE } from "./index"
 import { useContext } from "react"
 import { FormDataContext } from "./context/FormDataContext"
+import axios from "axios"
 
 function App() {
 
-  const handleSubmit=()=>{
-    console.log("Submitted")
+  const initialState={
+    "Name":"",
+    "Employee Code":"",
+    "Phone Number":"",
+    "Alternative Number":"",
+    "Flat No":"",
+    "Address":"",
+    "Area":"",
+    "Location Pin":"",
+    "Property Type":""
+}
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    console.log("Successs",formData)
+    // axios.post("url",formData)
+    FormDataContext.setFormData(initialState);
   }
 
   const formData=useContext(FormDataContext);
-  console.log("formdata",formData);
   return (
     <>
       <div className="drop-shadow-lg flex 
@@ -30,7 +44,7 @@ function App() {
           <FormNumberInput inputName={"Alternative Number"}/>
           <FormInput inputName={"Location Pin"}/>
           <FormSelect inputName={"Property Type"} values={PROPERTY_TYPE}/>
-          <button className="bg-green-600 text-white rounded-md m-4 p-2">Submit</button>
+          <button className="bg-green-600 text-white rounded-md m-4 p-2" >Submit</button>
           </form>
         </div>
       </div>
